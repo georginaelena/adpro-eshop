@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Iterator;
 
@@ -14,11 +13,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class ProductRepositoryTest {
+
     @InjectMocks
     ProductRepository productRepository;
 
     @BeforeEach
     void setUp() {
+        // Your setup code goes here
     }
 
     @Test
@@ -31,12 +32,12 @@ class ProductRepositoryTest {
 
         Iterator<Product> productIterator = productRepository.findAll();
         assertTrue(productIterator.hasNext());
+
         Product savedProduct = productIterator.next();
         assertEquals(product.getProductId(), savedProduct.getProductId());
         assertEquals(product.getProductName(), savedProduct.getProductName());
         assertEquals(product.getProductQuantity(), savedProduct.getProductQuantity());
     }
-
     @Test
     void testFindAllIfEmpty() {
         Iterator<Product> productIterator = productRepository.findAll();
@@ -59,10 +60,98 @@ class ProductRepositoryTest {
 
         Iterator<Product> productIterator = productRepository.findAll();
         assertTrue(productIterator.hasNext());
-        Product savedProduct = productIterator.next();
-        assertEquals(product1.getProductId(), savedProduct.getProductId());
-        savedProduct = productIterator.next();
-        assertEquals(product2.getProductId(), savedProduct.getProductId());
+
+        Product savedProduct1 = productIterator.next();
+        assertEquals(product1.getProductId(), savedProduct1.getProductId());
+
+        Product savedProduct2 = productIterator.next();
+        assertEquals(product2.getProductId(), savedProduct2.getProductId());
+
         assertFalse(productIterator.hasNext());
+    }
+
+    @Test
+    void testEditNameAndNotFound() {
+        Product product1 = new Product();
+        product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product1.setProductName("Sampo Cap Bambang");
+        product1.setProductQuantity(100);
+        productRepository.create(product1);
+
+        Product editProduct1 = new Product();
+        editProduct1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        editProduct1.setProductName("Sampo Cap Bambang 2");
+        editProduct1.setProductQuantity(100);
+
+        productRepository.edit(editProduct1);
+
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertTrue(productIterator.hasNext());
+        Product savedProduct1 = productIterator.next();
+        assertNotEquals(product1, savedProduct1.getProductId());
+    }
+
+    @Test
+    void testEditQuantityAndFound() {
+        Product product1 = new Product();
+        product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product1.setProductName("Sampo Cap Bambang");
+        product1.setProductQuantity(100);
+        productRepository.create(product1);
+
+        Product editProduct1 = new Product();
+        editProduct1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        editProduct1.setProductName("Sampo Cap Bambang");
+        editProduct1.setProductQuantity(30);
+
+        productRepository.edit(editProduct1);
+        product1.setProductQuantity(30);
+
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertTrue(productIterator.hasNext());
+        Product savedProduct1 = productIterator.next();
+        assertEquals(editProduct1.getProductQuantity(), savedProduct1.getProductQuantity());
+    }
+
+    @Test
+    void testDeleteAndFoundOther() {
+        Product product1 = new Product();
+        product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product1.setProductName("Sampo Cap Bambang");
+        product1.setProductQuantity(100);
+        productRepository.create(product1);
+
+        Product product2 = new Product();
+        product2.setProductId("a0f9de46-90b1-437d-a0bf-d0821dde9096");
+        product2.setProductName("Sampo Cap Usep");
+        product2.setProductQuantity(50);
+        productRepository.create(product2);
+
+        productRepository.delete("a0f9de46-90b1-437d-a0bf-d0821dde9096");
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertTrue(productIterator.hasNext());
+        Product savedProduct1 = productIterator.next();
+        assertEquals(product1.getProductId(), savedProduct1.getProductId());
+    }
+
+    @Test
+    void testDeleteAndNotFound() {
+        Product product1 = new Product();
+        product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product1.setProductName("Sampo Cap Bambang");
+        product1.setProductQuantity(100);
+        productRepository.create(product1);
+
+        Product product2 = new Product();
+        product2.setProductId("a0f9de46-90b1-437d-a0bf-d0821dde9096");
+        product2.setProductName("Sampo Cap Usep");
+        product2.setProductQuantity(50);
+        productRepository.create(product2);
+
+        productRepository.delete("a0f9de46-90b1-437d-a0bf-d0821dde9096");
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertTrue(productIterator.hasNext());
+        Product savedProduct1 = productIterator.next();
+        assertNotEquals(product2.getProductId(), savedProduct1.getProductId());
     }
 }
