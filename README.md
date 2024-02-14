@@ -27,3 +27,14 @@ Setelah menulis uji unit, saya merasa lebih percaya diri dengan kualitas kode ya
 Untuk memastikan bahwa uji unit sudah cukup untuk memverifikasi program, penting untuk memperhatikan cakupan kode (code coverage). Cakupan kode yang tinggi, meskipun tidak mencapai 100%, dapat memberikan keyakinan tambahan bahwa kode telah diuji dengan baik. Namun, memiliki 100% cakupan kode tidak menjamin bahwa kode tersebut bebas dari bug atau kesalahan. Masih mungkin ada kasus-kasus yang belum tercakup dalam uji unit, terutama dalam uji fungsionalitas yang kompleks.
 
 Mengenai pembuatan uji fungsional baru, saya percaya bahwa duplikasi kode akan menurunkan kualitas kode. Menulis ulang kode yang serupa hanya akan mengotori kode dan melanggar prinsip "Don't repeat yourself (DRY)". Sebagai gantinya, saya menyarankan untuk membuat uji fungsional baru dengan pendekatan yang lebih modular, memanfaatkan penggunaan metode bantu dan pengelolaan setup yang lebih efisien. Ini akan memastikan bahwa kode tetap bersih dan mudah dipelihara di masa depan.
+
+### Refleksi 3
+
+1. **Daftar Masalah Kualitas Kode yang Telah Diperbaiki**
+
+Selama latihan tersebut, saya berhasil menemukan dan memperbaiki beberapa isu kualitas kode, seperti kesalahan sintaksis, redundansi kode, dan alur suatu test. Strategi saya dalam memperbaikinya adalah dengan menggunakan alat analisis statis seperti linter dan static code analysis tools untuk mengidentifikasi masalah tersebut secara otomatis. Selain itu, saya juga melakukan code review untuk menemukan dan memperbaiki masalah yang lebih kompleks.
+
+2. **Evaluasi CI/CD Workflows/Pipelines**
+
+Melihat pada workflow CI/CD (GitHub) yang saya terapkan, saya percaya bahwa implementasi saat ini telah memenuhi definisi Continuous Integration (CI) dan Continuous Deployment (CD). Alasannya adalah pertama, setiap kali ada perubahan kode yang di-commit, sistem secara otomatis menjalankan rangkaian pengujian untuk memastikan integritas dan kualitas kode. Kedua, hasil dari pengujian ini secara otomatis diperiksa dan jika berhasil, kode akan secara otomatis di-deploy ke platform as a service (PaaS) tanpa campur tangan manual. Ketiga, proses ini berjalan secara terus menerus dan otomatis tanpa memerlukan intervensi manual, yang sesuai dengan prinsip CI/CD yang berkelanjutan.
+
