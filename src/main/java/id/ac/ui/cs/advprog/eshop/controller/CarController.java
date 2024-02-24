@@ -1,4 +1,5 @@
 package id.ac.ui.cs.advprog.eshop.controller;
+
 import id.ac.ui.cs.advprog.eshop.model.Car;
 import id.ac.ui.cs.advprog.eshop.service.CarServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/car")
-public class CarController{
+public class CarController extends ProductController {
     @Autowired
     private CarServiceImpl carService;
 
@@ -18,7 +19,7 @@ public class CarController{
     public String createCarPage(Model model) {
         Car car = new Car();
         model.addAttribute("car", car);
-        return "CreateCar";
+        return "createCar";
     }
 
     @PostMapping("/createCar")
@@ -31,15 +32,16 @@ public class CarController{
     public String listCarPage(Model model) {
         List<Car> allCars = carService.findAll();
         model.addAttribute("cars", allCars);
-        return "CarList";
+        return "carList";
     }
 
     @GetMapping(value = "/editCar/{carId}")
     public String editProductPage(Model model, @PathVariable("carId") String productId) {
         Car car = carService.findById(productId);
         model.addAttribute("car", car);
-        return "EditCar";
+        return "editCar";
     }
+
 
     @PostMapping("/editCar")
     public String editProductPost(@ModelAttribute("car") Car car, Model model) {
