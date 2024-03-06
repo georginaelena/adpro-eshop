@@ -44,3 +44,15 @@ Mengenai pembuatan uji fungsional baru, saya percaya bahwa duplikasi kode akan m
    - ***Kode menjadi kurang terstruktur dan sulit dipahami***. Misalnya, jika sebuah kelas memiliki banyak tanggung jawab, akan sulit bagi pengembang lain untuk memahami apa yang sebenarnya dilakukan oleh kelas tersebut.
    - ***Penambahan fitur baru menjadi sulit dan berisiko***. Tanpa menerapkan OCP, penambahan fitur baru sering kali memerlukan modifikasi pada kode yang sudah ada. Hal ini dapat menyebabkan timbulnya bug atau masalah yang tidak terduga.
    - ***Pengujian (testing) menjadi lebih sulit***. Tanpa menerapkan prinsip SOLID, kelas yang bergantung pada implementasi konkret akan sulit diuji secara terpisah, karena terikat secara erat dengan detail implementasi.
+
+### Refleksi 4
+
+1) **Alur Test-Driven Development (TDD) bermanfaat atau tidak, dengan merujuk pada pertanyaan reflektif yang diajukan oleh Percival (2017) dalam bab "Evaluating Your Testing Objectives" di dalam submodul "Principles and Best Practice of Testing"** 
+   - ***Menurut saya, alur TDD ini sangat bermanfaat***. Dengan TDD, saya dapat memastikan bahwa kode yang saya tulis memiliki pengujian yang kuat sejak awal. Ini membantu saya dalam mengidentifikasi bug atau kesalahan logika sebelum kode tersebut digunakan di lingkungan produksi. Selain itu, TDD memungkinkan saya untuk merancang kode dengan lebih baik karena saya harus memikirkan tentang pengujian unit sebelumnya. Namun, mungkin ada beberapa hal yang bisa saya lakukan untuk meningkatkan proses TDD saya di masa depan, seperti lebih fokus pada pengujian integrasi dan mengidentifikasi skenario pengujian yang lebih kompleks.
+2) **Refleksi terhadap unit-test yang telah saya buat**
+   - Berdasarkan prinsip-prinsip F.I.R.S.T., saya akan mengevaluasi apakah pengujian unit yang telah saya buat memenuhi standar tersebut:
+     - ***Fast*** (Cepat): Ya, pengujian saya telah memenuhi prinsip ini dengan memisahkan pengujian unit dan fungsional serta menggunakan "stubs" untuk menghasilkan hasil yang telah ditentukan sebelumnya dari pemanggilan fungsi, sehingga pengujian tidak akan bergantung pada pengujian lainnya.
+     - ***Isolated*** (Terisolasi): Iya, pengujian saya sudah terisolasi dengan baik dengan menggunakan "mock objects" dan "setUp" untuk mencegah duplikasi objek.
+     - ***Repeatable*** (Dapat Diulang): Ya, pengujian saya sudah memenuhi prinsip ini dengan memastikan setiap pengujian terisolasi dengan baik sehingga data yang digunakan dalam pengujian tetap konsisten setiap kali pengujian dilakukan.
+     - ***Self-Validating*** (Memvalidasi Sendiri): Pengujian saya belum sepenuhnya memenuhi aspek ini karena masih ada beberapa pengujian yang memiliki terlalu banyak "assert" di dalamnya. Oleh karena itu, saya perlu memisahkan setiap "assert" ke dalam pengujian yang berbeda untuk memastikan validasi yang lebih baik.
+     - ***Thorough*** (Komprehensif): Ya, pengujian saya sudah mencakup semua kemungkinan jalur pengujian, baik yang bahagia maupun yang tidak, serta mencakup semua kemungkinan kesalahan yang mungkin terjadi.
