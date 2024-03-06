@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class PaymentRepository {
     private Map<String, Payment> paymentData = new HashMap<>();
 
